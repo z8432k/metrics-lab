@@ -107,10 +107,14 @@ string reg::str() {
         string str;
         getline(cin, str);
 
-        if (str.length() >= 2) {
-            return str;
-        } else {
+        if (str.length() < 2) {
             cerr << "Слишком короткий текст." << endl;
+        }
+        else if (str.length() > 60) {
+            cerr << "Слишком длинный текст." << endl;
+        }
+        else {
+            return str;
         }
     }
 }
