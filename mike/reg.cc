@@ -61,22 +61,17 @@ bool reg::addTicket() {
 
 string reg::inputTicket() {
     string ticket;
-    string manufacturer;
-    string brand;
-    int iso;
+    int number = findmax() + 1;
+    string fio;
+    int window;
 
-    // todo: chage
+    cout << "Введите ФИО" << endl;
+    fio = str();
 
-    cout << "Введите название производителя" << endl;
-    manufacturer = str();
+    cout << "Введите номер окна" << endl;
+    window = num(0, 5);
 
-    cout << "Введите название бренда:" << endl;
-    brand = str();
-
-    cout << "Введите чувствительность:" << endl;
-    iso = num(1, 12800);
-
-    ticket = manufacturer + "\t" + brand + "\t" + to_string(iso);
+    ticket = to_string(number) + "\t" + fio + "\t" + to_string(window);
 
     return ticket;
 }
@@ -222,4 +217,24 @@ size_t reg::split(const std::string &str, std::vector<std::string> &items, char 
     items.push_back(str.substr( initialPos, std::min( pos, str.size() ) - initialPos + 1));
 
     return items.size();
+}
+
+int reg::findmax() {
+    int max = 1;
+    vector<string> items;
+    int cur;
+
+    for (auto &t : tickets) {
+        auto cnt = split(t, items, '\t');
+
+        if (cnt > 0) {
+            cur = stoi(items[0]);
+
+            if (cur > max) {
+                max = cur;
+            }
+        }
+    }
+
+    return max;
 }

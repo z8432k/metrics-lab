@@ -1,4 +1,6 @@
 #include "foto.h"
+#include "../mike/reg.h"
+
 #include <algorithm>
 
 reg::reg(): inFile("data.txt"), outFile("mark.txt") {
@@ -33,6 +35,7 @@ void reg::writeTimestamp() {
 
     outFile.close();
 }
+
 
 void reg::trimData() {
     rows.clear();

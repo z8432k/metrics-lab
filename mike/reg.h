@@ -20,7 +20,7 @@ private:
     string buf;
     bool down = false;
 
-    static string inputTicket();
+    string inputTicket();
 
     void setDate();
 
@@ -29,6 +29,8 @@ private:
     void aroundData(function<void(ofstream &out)> &callback);
 
     static size_t split(const std::string &str, std::vector<std::string> &items, char sep);
+
+    int findmax();
 
 public:
 
