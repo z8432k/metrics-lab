@@ -118,19 +118,18 @@ string reg::str() {
 }
 
 void reg::updateTicket(int number) {
-    string ticket;
+    int pos = getPos(number);
     int window;
 
     cout << "Введите номер окна" << endl;
     window = num(0, 5);
 
-    int pos = getPos(number);
-
     string orig = tickets[pos];
+
     vector<string> items;
     split(orig, items, '\t');
 
-    ticket = to_string(number) + "\t" + items[1] + "\t" + to_string(window);
+    string ticket = to_string(number) + "\t" + items[1] + "\t" + to_string(window);
 
     function<void (ofstream &out)> cb = [this, &pos, &ticket](ofstream &outD) -> void {
         tickets.erase(tickets.begin() + pos);
@@ -142,11 +141,11 @@ void reg::updateTicket(int number) {
 
 bool reg::drop(int id) {
     bool flag = true;
+    int pos = getPos(id);
 
-
-    function<void (ofstream &out)> cb = [this, &id, &flag](ofstream &outD) -> void {
+    function<void (ofstream &out)> cb = [this, &id, &pos, &flag](ofstream &outD) -> void {
         if (tickets.size() > id) {
-            tickets.erase(tickets.begin() + (id - 1));
+            tickets.erase(tickets.begin() + pos);
         } else {
             cerr << "Номер в очереди не найден." << endl;
             flag = false;
