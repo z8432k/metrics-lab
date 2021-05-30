@@ -38,11 +38,18 @@ int main() {
     menu_choice = getnumber(0, 8);
 
     int id;
+    bool ok = true;
     switch (menu_choice) {
         case 1:
             system("clear");
-            f.addRow();
-            cout << "Запись успешно добавлена." << endl;
+            ok = f.addRow();
+
+            if (ok) {
+                cout << "Запись успешно добавлена." << endl;
+            }
+            else {
+                ok = true;
+            }
             break;
         case 2:
             system("clear");
@@ -68,8 +75,14 @@ int main() {
             system("clear");
             cout << "Введите номер записи, которую необходимо изменить:"<< endl;
             id = getnumber();
-            f.dropRow(id);
-            cout << "Запись под номером " << id << " была удалена."<<endl;
+            ok = f.dropRow(id);
+
+            if (ok) {
+                cout << "Запись под номером " << id << " была удалена."<<endl;
+            }
+            else {
+                ok = true;
+            }
             break;
         case 7:
             system("clear");

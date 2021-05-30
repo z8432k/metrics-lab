@@ -59,7 +59,7 @@ void foto::printMenu() {
     cout << "(8) Выход." << endl;
 }
 
-void foto::addRow() {
+bool foto::addRow() {
     string row = readRow();
 
     outFileData.open("data.txt");
@@ -70,7 +70,7 @@ void foto::addRow() {
 
     if (isDuplicate(row)) {
         cerr << "Подобная запись уже существует." << endl;
-        return;
+        return false;
     }
 
     rows.push_back(row);
@@ -80,6 +80,8 @@ void foto::addRow() {
     }
 
     outFileData.close();
+
+    return true;
 }
 
 string foto::readRow() {
@@ -159,7 +161,7 @@ void foto::updateRow(int id) {
     outFileData.close();
 }
 
-void foto::dropRow(int id) {
+bool foto::dropRow(int id) {
     outFileData.open("data.txt");
 
     if (!outFileData.is_open()) {
@@ -172,6 +174,8 @@ void foto::dropRow(int id) {
     }
     else {
         cerr << "Запись под указанным номером не существует." << endl;
+
+        return false;
     }
 
     for (auto &item : rows) {
@@ -179,6 +183,8 @@ void foto::dropRow(int id) {
     }
 
     outFileData.close();
+
+    return true;
 }
 
 void foto::ascSort() {
@@ -203,22 +209,4 @@ bool foto::isDuplicate(string &entry) {
     }
 
     return result;
-}
-
-size_t foto::split(const std::string &str, std::vector<std::string> &items, char sep) {
-    size_t pos = str.find(sep);
-    size_t initialPos = 0;
-    items.clear();
-
-    while(pos != std::string::npos) {
-        items.push_back(str.substr(initialPos, pos - initialPos));
-        initialPos = pos + 1;
-
-        pos = str.find(sep, initialPos);
-    }
-
-    // Add the last one
-    items.push_back(str.substr(initialPos, std::min(pos, str.size()) - initialPos + 1));
-
-    return items.size();
 }

@@ -18,16 +18,15 @@ private:
 
     static string readRow();
     bool isDuplicate(string &entry);
-    size_t split(const std::string &str, std::vector<std::string> &items, char sep);
 
 public:
     foto();
     void printAll(vector<string> *rows = nullptr);
     void writeTimestamp();
     void trimData();
-    void addRow();
+    bool addRow();
     void updateRow(int id);
-    void dropRow(int id);
+    bool dropRow(int id);
     void ascSort();
     void descSort();
 
