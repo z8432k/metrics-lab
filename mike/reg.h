@@ -18,16 +18,17 @@ private:
     ofstream outData, out;
     vector<string> tickets;
     string buf;
+    bool down = false;
 
     static string inputTicket();
 
     void setDate();
-    void aroundData(function<void (ofstream &out)> &callback);
-
-public:
-    reg();
-
     void showTickets(vector<string> *rows);
+    void aroundData(function<void (ofstream &out)> &callback);
+public:
+
+    reg();
+    void show();
 
     void writeTimestamp();
 
@@ -35,13 +36,15 @@ public:
 
     bool addTicket();
 
-    void updateRow(int id);
+    void updateTicket(int id);
 
-    bool dropRow(int id);
+    bool drop(int id);
 
     void upsort();
 
     void downsort();
+
+    void changeSortOrder()
 
     static int num(size_t min, size_t max);
 

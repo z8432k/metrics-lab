@@ -27,6 +27,16 @@ void reg::showTickets(vector<string> *r) {
     }
 }
 
+
+void reg::show() {
+    if (down) {
+        downsort();
+    }
+    else {
+        upsort();
+    }
+}
+
 void reg::emptyBase() {
     tickets.clear();
 
@@ -112,7 +122,7 @@ string reg::str() {
     }
 }
 
-void reg::updateRow(int id) {
+void reg::updateTicket(int id) {
     string t = inputTicket();
 
     function<void (ofstream &out)> cb = [this, &id, &t](ofstream &outD) -> void {
@@ -126,7 +136,7 @@ void reg::updateRow(int id) {
     aroundData(cb);
 }
 
-bool reg::dropRow(int id) {
+bool reg::drop(int id) {
     bool flag = true;
 
 
@@ -172,5 +182,9 @@ void reg::aroundData(function<void(ofstream &)> &callback) {
     }
 
     outData.close();
+}
+
+void reg::changeSortOrder() {
+    down = !down;
 }
 

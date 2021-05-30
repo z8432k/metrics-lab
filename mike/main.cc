@@ -32,7 +32,7 @@ int main() {
         switch (point) {
             case 1:
                 system("clear");
-                db.showTickets(NULL);
+                db.show();
                 cout << endl;
                 break;
             case 2:
@@ -45,7 +45,7 @@ int main() {
                 system("clear");
                 cout << "Введите номер записи, которую необходимо изменить:" << endl;
                 id = reg::num(0, QSIZE);
-                db.updateRow(id);
+                db.updateTicket(id);
                 cout << "Запись успешно обновлена." << endl;
                 break;
             case 4:
@@ -53,7 +53,7 @@ int main() {
                 cout << "Введите номер записи, которую необходимо изменить:" << endl;
                 id = reg::num(0, QSIZE);
 
-                if (db.dropRow(id)) {
+                if (db.drop(id)) {
                     cout << "Запись под номером " << id << " была удалена." << endl;
                 }
                 break;
@@ -68,8 +68,8 @@ int main() {
                 break;
             case 7:
                 system("clear");
-                // db.changeSortOrder();
-                cout << "" << endl;
+                db.changeSortOrder();
+                cout << "Порядок сортировки изменён" << endl;
                 break;
             default:
                 if (point != 8) {
