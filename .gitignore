@@ -14,3 +14,5 @@ cmake-build-*/
 tmp/
 data.txt
 mark.txt
+lastuse.txt
+register.txt

@@ -51,7 +51,7 @@ int main() {
                 break;
             case 4:
                 system("clear");
-                cout << "Введите номер записи, которую необходимо изменить:" << endl;
+                cout << "Введите номер записи, которую необходимо удалить:" << endl;
                 id = reg::num(0, QSIZE);
 
                 if (db.drop(id)) {

@@ -16,14 +16,12 @@ reg::reg() : in(DATA), out(DATE) {
 }
 
 void reg::showTickets(vector<string> *r) {
-    size_t cnt = 1;
-
     if (r==nullptr) {
         r = &tickets;
     }
 
     for (auto &item :  *r) {
-        cout << cnt++ << "\t" << item << endl;
+        cout << "\t" << item << endl;
     }
 }
 
@@ -143,8 +141,8 @@ bool reg::drop(int id) {
     bool flag = true;
     int pos = getPos(id);
 
-    function<void (ofstream &out)> cb = [this, &id, &pos, &flag](ofstream &outD) -> void {
-        if (tickets.size() > id) {
+    function<void (ofstream &out)> cb = [this, &pos, &flag](ofstream &outD) -> void {
+        if (tickets.size() > pos) {
             tickets.erase(tickets.begin() + pos);
         } else {
             cerr << "Номер в очереди не найден." << endl;
