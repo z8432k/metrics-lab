@@ -1,4 +1,4 @@
-#include "reg.h"
+#include <reg.h>
 #include <algorithm>
 
 reg::reg() : in(DATA), out(DATE) {
