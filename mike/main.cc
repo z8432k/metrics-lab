@@ -20,6 +20,7 @@ int main() {
     setlocale(LC_ALL, "Russian");
     int point = 0;
     int id;
+    string result;
     reg db;
 
     while (point != 8) {
@@ -64,7 +65,10 @@ int main() {
                 break;
             case 6:
                 system("clear");
-                // db.searchByNum(num);
+                id = reg::num(0, QSIZE);
+                cout << "Введите номер в очереди" << endl;
+                result = db.searchTicket(id);
+                cout << result << endl;
                 break;
             case 7:
                 system("clear");

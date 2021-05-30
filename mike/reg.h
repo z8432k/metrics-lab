@@ -23,11 +23,17 @@ private:
     static string inputTicket();
 
     void setDate();
+
     void showTickets(vector<string> *rows);
-    void aroundData(function<void (ofstream &out)> &callback);
+
+    void aroundData(function<void(ofstream &out)> &callback);
+
+    static size_t split(const std::string &str, std::vector<std::string> &items, char sep);
+
 public:
 
     reg();
+
     void show();
 
     void writeTimestamp();
@@ -44,7 +50,9 @@ public:
 
     void downsort();
 
-    void changeSortOrder()
+    void changeSortOrder();
+
+    string searchTicket(int id);
 
     static int num(size_t min, size_t max);
 

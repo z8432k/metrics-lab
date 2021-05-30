@@ -188,3 +188,38 @@ void reg::changeSortOrder() {
     down = !down;
 }
 
+string reg::searchTicket(int id) {
+    string result;
+    string sid = to_string(id);
+
+    auto found = find_if(tickets.begin(), tickets.end(), [&sid](string &item) {
+        vector<string> items;
+        split(item, items, '\t');
+
+        if (items[0] == sid) {
+            return true;
+        }
+
+        return false;
+    });
+
+    return found[0];
+}
+
+
+size_t reg::split(const std::string &str, std::vector<std::string> &items, char sep) {
+    size_t pos = str.find(sep);
+    size_t initialPos = 0;
+    items.clear();
+
+    while(pos != std::string::npos) {
+        items.push_back(str.substr(initialPos, pos - initialPos));
+        initialPos = pos + 1;
+
+        pos = str.find(sep, initialPos );
+    }
+
+    items.push_back(str.substr( initialPos, std::min( pos, str.size() ) - initialPos + 1));
+
+    return items.size();
+}
