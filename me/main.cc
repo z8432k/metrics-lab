@@ -30,6 +30,7 @@ int main() {
 
     f.writeTimestamp();
 
+    menu:
     cout << "Выберите пункт меню" << endl;
 
     foto::printMenu();
@@ -75,11 +76,17 @@ int main() {
             break;
         case 8:
             system("clear");
-            break;
+            goto exit;
         default:
-            break;
-
+            cerr << "Неизвестный пункт меню." << endl;
+            goto menu;
     }
+
+    goto menu;
+
+    exit:
 
     return 0;
 }
+
+#pragma clang diagnostic pop

@@ -18,7 +18,7 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 if(CMAKE_COMPILER_IS_GNUCC)
     message(STATUS "Detected GNU compiler. Using specific flags.")
-    set(CMAKE_CXX_FLAGS_DEBUG "-pipe -Wall -Wextra -Wpedantic -O0 -ggdb")
+    set(CMAKE_CXX_FLAGS_DEBUG "-pipe -Wall -Wextra -Wpedantic -O0 -ggdb --coverage")
     set(CMAKE_CXX_FLAGS_RELEASE "-pipe -march=native -O3")
     set(CMAKE_CXX_FLAGS "-Wno-unused-parameter")
 endif()
