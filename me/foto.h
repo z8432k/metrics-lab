@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class foto {
+class reg {
 private:
     ifstream inFile;
     ofstream outFileData;
@@ -20,7 +20,7 @@ private:
     bool isDuplicate(string &entry);
 
 public:
-    foto();
+    reg();
     void printAll(vector<string> *rows = nullptr);
     void writeTimestamp();
     void trimData();

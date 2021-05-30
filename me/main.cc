@@ -26,14 +26,14 @@ int main() {
     setlocale(LC_ALL, "Russian");
 
     int menu_choice;
-    foto f;
+    reg f;
 
     f.writeTimestamp();
 
     menu:
     cout << "Выберите пункт меню" << endl;
 
-    foto::printMenu();
+    reg::printMenu();
 
     menu_choice = getnumber(0, 8);
 

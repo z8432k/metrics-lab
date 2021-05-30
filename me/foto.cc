@@ -1,7 +1,7 @@
 #include "foto.h"
 #include <algorithm>
 
-foto::foto(): inFile("data.txt"), outFile("mark.txt") {
+reg::reg(): inFile("data.txt"), outFile("mark.txt") {
     if (!inFile.is_open() | !outFile.is_open()) {
         cerr << "Файл не может быть открыт." << endl;
     }
@@ -13,7 +13,7 @@ foto::foto(): inFile("data.txt"), outFile("mark.txt") {
     inFile.close();
 }
 
-void foto::printAll(vector<string> *r) {
+void reg::printAll(vector<string> *r) {
     size_t cnt = 1;
 
     if (r == nullptr) {
@@ -25,7 +25,7 @@ void foto::printAll(vector<string> *r) {
     }
 }
 
-void foto::writeTimestamp() {
+void reg::writeTimestamp() {
     time_t now = time(nullptr);
     tm* ltm = localtime(&now);
 
@@ -34,7 +34,7 @@ void foto::writeTimestamp() {
     outFile.close();
 }
 
-void foto::trimData() {
+void reg::trimData() {
     rows.clear();
 
     outFileData.open("data.txt");
@@ -48,7 +48,7 @@ void foto::trimData() {
     outFileData.close();
 }
 
-void foto::printMenu() {
+void reg::printMenu() {
     cout << "(1) Добавить запись." << endl;
     cout << "(2) Сортировка по возрастанию." << endl;
     cout << "(3) Сортировка по убыванию." << endl;
@@ -59,7 +59,7 @@ void foto::printMenu() {
     cout << "(8) Выход." << endl;
 }
 
-bool foto::addRow() {
+bool reg::addRow() {
     string row = readRow();
 
     outFileData.open("data.txt");
@@ -84,7 +84,7 @@ bool foto::addRow() {
     return true;
 }
 
-string foto::readRow() {
+string reg::readRow() {
     string row;
     string manufacturer;
     string brand;
@@ -104,7 +104,7 @@ string foto::readRow() {
     return row;
 }
 
-int foto::getnumber(int min, int max) {
+int reg::getnumber(int min, int max) {
     int result;
 
     for (;;) {
@@ -124,7 +124,7 @@ int foto::getnumber(int min, int max) {
 
 }
 
-string foto::getname() {
+string reg::getname() {
     for (;;) {
         string str;
         getline(cin, str);
@@ -138,7 +138,7 @@ string foto::getname() {
     }
 }
 
-void foto::updateRow(int id) {
+void reg::updateRow(int id) {
     string row = readRow();
 
     outFileData.open("data.txt");
@@ -147,7 +147,7 @@ void foto::updateRow(int id) {
         cerr << "Ошибка открытия файла данных.";
     }
 
-    if (rows.size() > id) {
+    if (rows.size() <= id) {
         rows.at(id - 1) = row;
     }
     else {
@@ -161,7 +161,7 @@ void foto::updateRow(int id) {
     outFileData.close();
 }
 
-bool foto::dropRow(int id) {
+bool reg::dropRow(int id) {
     outFileData.open("data.txt");
 
     if (!outFileData.is_open()) {
@@ -169,7 +169,7 @@ bool foto::dropRow(int id) {
     }
 
 
-    if (rows.size() > id) {
+    if (rows.size() <= id) {
         rows.erase(rows.begin() + (id - 1));
     }
     else {
@@ -187,21 +187,21 @@ bool foto::dropRow(int id) {
     return true;
 }
 
-void foto::ascSort() {
+void reg::ascSort() {
     vector<string> sorted = rows;
     sort(sorted.begin(), sorted.end());
 
     printAll(&sorted);
 }
 
-void foto::descSort() {
+void reg::descSort() {
     vector<string> sorted = rows;
     sort(sorted.begin(), sorted.end(), greater <>());
 
     printAll(&sorted);
 }
 
-bool foto::isDuplicate(string &entry) {
+bool reg::isDuplicate(string &entry) {
     bool result = false;
 
     if (find(rows.begin(), rows.end(), entry) != rows.end()) {
