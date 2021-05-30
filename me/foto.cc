@@ -16,7 +16,7 @@ void foto::printAll() {
     size_t cnt = 1;
 
     for (auto &item :  rows) {
-        cout << cnt << "\t" << item << endl;
+        cout << cnt++ << "\t" << item << endl;
     }
 }
 
