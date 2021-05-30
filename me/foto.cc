@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-reg::reg(): inFile("data.txt"), outFile("mark.txt") {
+foto::foto(): inFile("data.txt"), outFile("mark.txt") {
     if (!inFile.is_open() | !outFile.is_open()) {
         cerr << "Файл не может быть открыт." << endl;
     }
@@ -14,7 +14,7 @@ reg::reg(): inFile("data.txt"), outFile("mark.txt") {
     inFile.close();
 }
 
-void reg::printAll(vector<string> *r) {
+void foto::printAll(vector<string> *r) {
     size_t cnt = 1;
 
     if (r == nullptr) {
@@ -26,7 +26,7 @@ void reg::printAll(vector<string> *r) {
     }
 }
 
-void reg::writeTimestamp() {
+void foto::writeTimestamp() {
     time_t now = time(nullptr);
     tm* ltm = localtime(&now);
 
@@ -36,7 +36,7 @@ void reg::writeTimestamp() {
 }
 
 
-void reg::trimData() {
+void foto::trimData() {
     rows.clear();
 
     outFileData.open("data.txt");
@@ -50,7 +50,7 @@ void reg::trimData() {
     outFileData.close();
 }
 
-bool reg::addRow() {
+bool foto::addRow() {
     string row = readRow();
 
     outFileData.open("data.txt");
@@ -75,7 +75,7 @@ bool reg::addRow() {
     return true;
 }
 
-string reg::readRow() {
+string foto::readRow() {
     string row;
     string manufacturer;
     string brand;
@@ -95,7 +95,7 @@ string reg::readRow() {
     return row;
 }
 
-int reg::getnumber(int min, int max) {
+int foto::getnumber(int min, int max) {
     int result;
 
     for (;;) {
@@ -115,7 +115,7 @@ int reg::getnumber(int min, int max) {
 
 }
 
-string reg::getname() {
+string foto::getname() {
     for (;;) {
         string str;
         getline(cin, str);
@@ -129,7 +129,7 @@ string reg::getname() {
     }
 }
 
-void reg::updateRow(int id) {
+void foto::updateRow(int id) {
     string row = readRow();
 
     outFileData.open("data.txt");
@@ -152,7 +152,7 @@ void reg::updateRow(int id) {
     outFileData.close();
 }
 
-bool reg::dropRow(int id) {
+bool foto::dropRow(int id) {
     outFileData.open("data.txt");
 
     if (!outFileData.is_open()) {
@@ -178,21 +178,21 @@ bool reg::dropRow(int id) {
     return true;
 }
 
-void reg::ascSort() {
+void foto::ascSort() {
     vector<string> sorted = rows;
     sort(sorted.begin(), sorted.end());
 
     printAll(&sorted);
 }
 
-void reg::descSort() {
+void foto::descSort() {
     vector<string> sorted = rows;
     sort(sorted.begin(), sorted.end(), greater <>());
 
     printAll(&sorted);
 }
 
-bool reg::isDuplicate(string &entry) {
+bool foto::isDuplicate(string &entry) {
     bool result = false;
 
     if (find(rows.begin(), rows.end(), entry) != rows.end()) {

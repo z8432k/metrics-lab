@@ -37,7 +37,7 @@ int main() {
     setlocale(LC_ALL, "Russian");
 
     int menu_choice;
-    reg f;
+    foto f;
 
     f.writeTimestamp();
 
