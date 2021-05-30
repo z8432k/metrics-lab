@@ -30,26 +30,18 @@ void reg::showTickets(vector<string> *r) {
 void reg::emptyBase() {
     tickets.clear();
 
-    function<void (ofstream &out)> lambda = [](ofstream &out) {
-        1 + 1;
+    function<void (ofstream &out)> cb = [](ofstream &outD) -> void {
+        outD << "";
     };
 
-    outData.open(DATA);
-
-    if (!outData.is_open()) {
-        cerr << "Ошибка открытия файла данных.";
-    }
-
-    outData << "";
-
-    outData.close();
+    aroundData(cb);
 }
 
-bool reg::addRow() {
-    string row = readRow();
+bool reg::addTicket() {
+    string ticket = inputTicket();
 
-    function<void (ofstream &out)> cb = [this, &row](ofstream &outD) -> void {
-        tickets.push_back(row);
+    function<void (ofstream &out)> cb = [this, &ticket](ofstream &outD) -> void {
+        tickets.push_back(ticket);
     };
 
     aroundData(cb);
@@ -57,11 +49,13 @@ bool reg::addRow() {
     return true;
 }
 
-string reg::readRow() {
-    string row;
+string reg::inputTicket() {
+    string ticket;
     string manufacturer;
     string brand;
     int iso;
+
+    // todo: chage
 
     cout << "Введите название производителя" << endl;
     manufacturer = str();
@@ -72,28 +66,27 @@ string reg::readRow() {
     cout << "Введите чувствительность:" << endl;
     iso = num(1, 12800);
 
-    row = manufacturer + "\t" + brand + "\t" + to_string(iso);
+    ticket = manufacturer + "\t" + brand + "\t" + to_string(iso);
 
-    return row;
+    return ticket;
 }
 
 int reg::num(size_t min, size_t max) {
-    int result;
+    int res;
 
-    for (;;) {
-        cin >> result;
+    while (true) {
+        cin >> res;
 
-        if (result > min && result <= max) {
+        if (res > min && res <= max) {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-            return result;
+            return res;
         } else {
             cerr << "Ошибка. Попробуйте ещё раз." << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
-
 }
 
 void reg::setDate() {
@@ -114,56 +107,41 @@ string reg::str() {
         if (str.length() >= 2) {
             return str;
         } else {
-            cerr << "Название не болжно быть таким коротким." << endl;
+            cerr << "Слишком короткий текст." << endl;
         }
     }
 }
 
 void reg::updateRow(int id) {
-    string row = readRow();
+    string t = inputTicket();
 
-    outData.open(DATA);
+    function<void (ofstream &out)> cb = [this, &id, &t](ofstream &outD) -> void {
+        if (tickets.size() > id) {
+            tickets.at(id - 1) = t;
+        } else {
+            cerr << "Номер в очереди не найден" << endl;
+        }
+    };
 
-    if (!outData.is_open()) {
-        cerr << "Ошибка открытия файла данных.";
-    }
-
-    if (tickets.size() > id) {
-        tickets.at(id - 1) = row;
-    } else {
-        cerr << "Записи с указанным номером не существует" << endl;
-    }
-
-    for (auto &item : tickets) {
-        outData << item << endl;
-    }
-
-    outData.close();
+    aroundData(cb);
 }
 
 bool reg::dropRow(int id) {
-    outData.open(DATA);
-
-    if (!outData.is_open()) {
-        cerr << "Ошибка открытия файла данных.";
-    }
+    bool flag = true;
 
 
-    if (tickets.size() > id) {
-        tickets.erase(tickets.begin() + (id - 1));
-    } else {
-        cerr << "Запись под указанным номером не существует." << endl;
+    function<void (ofstream &out)> cb = [this, &id, &flag](ofstream &outD) -> void {
+        if (tickets.size() > id) {
+            tickets.erase(tickets.begin() + (id - 1));
+        } else {
+            cerr << "Номер в очереди не найден." << endl;
+            flag = false;
+        }
+    };
 
-        return false;
-    }
+    aroundData(cb);
 
-    for (auto &item : tickets) {
-        outData << item << endl;
-    }
-
-    outData.close();
-
-    return true;
+    return flag;
 }
 
 void reg::upsort() {

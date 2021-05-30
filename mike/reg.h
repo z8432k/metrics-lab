@@ -19,7 +19,7 @@ private:
     vector<string> tickets;
     string buf;
 
-    static string readRow();
+    static string inputTicket();
 
     void setDate();
     void aroundData(function<void (ofstream &out)> &callback);
@@ -33,7 +33,7 @@ public:
 
     void emptyBase();
 
-    bool addRow();
+    bool addTicket();
 
     void updateRow(int id);
 
