@@ -46,9 +46,11 @@ int main() {
             break;
         case 2:
             system("clear");
+            f.ascSort();
             break;
         case 3:
             system("clear");
+            f.descSort();
             break;
         case 4:
             system("clear");
@@ -75,7 +77,6 @@ int main() {
             cout << "Файл данных успешно очищщен." << endl;
             break;
         case 8:
-            system("clear");
             goto exit;
         default:
             cerr << "Неизвестный пункт меню." << endl;

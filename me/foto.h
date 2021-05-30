@@ -20,12 +20,14 @@ private:
 
 public:
     foto();
-    void printAll();
+    void printAll(vector<string> *rows = nullptr);
     void writeTimestamp();
     void trimData();
     void addRow();
     void updateRow(int id);
     void dropRow(int id);
+    void ascSort();
+    void descSort();
 
     static int getnumber(int min, int max);
     static string getname();

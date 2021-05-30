@@ -1,4 +1,5 @@
 #include "foto.h"
+#include <algorithm>
 
 foto::foto(): inFile("data.txt"), outFile("mark.txt") {
     if (!inFile.is_open() | !outFile.is_open()) {
@@ -12,10 +13,14 @@ foto::foto(): inFile("data.txt"), outFile("mark.txt") {
     inFile.close();
 }
 
-void foto::printAll() {
+void foto::printAll(vector<string> *r) {
     size_t cnt = 1;
 
-    for (auto &item :  rows) {
+    if (r == nullptr) {
+        r = &rows;
+    }
+
+    for (auto &item :  *r) {
         cout << cnt++ << "\t" << item << endl;
     }
 }
@@ -45,13 +50,13 @@ void foto::trimData() {
 
 void foto::printMenu() {
     cout << "(1) Добавить запись." << endl;
-    cout << "(2) Сортировка по возрастанию" << endl;
-    cout << "(3) Сортировка по убыванию" << endl;
+    cout << "(2) Сортировка по возрастанию." << endl;
+    cout << "(3) Сортировка по убыванию." << endl;
     cout << "(4) Изменить запись." << endl;
     cout << "(5) Вывести все записи." << endl;
     cout << "(6) Удалить запись." << endl;
     cout << "(7) Удалить все записи." << endl;
-    cout << "(8) Выход" << endl;
+    cout << "(8) Выход." << endl;
 }
 
 void foto::addRow() {
@@ -139,7 +144,7 @@ void foto::updateRow(int id) {
         rows.at(id - 1) = row;
     }
     else {
-        cerr << "аписи с указанным номером не существует" << endl;
+        cerr << "Записи с указанным номером не существует" << endl;
     }
 
     for (auto &item : rows) {
@@ -169,5 +174,19 @@ void foto::dropRow(int id) {
     }
 
     outFileData.close();
+}
+
+void foto::ascSort() {
+    vector<string> sorted = rows;
+    sort(sorted.begin(), sorted.end());
+
+    printAll(&sorted);
+}
+
+void foto::descSort() {
+    vector<string> sorted = rows;
+    sort(sorted.begin(), sorted.end(), greater <>());
+
+    printAll(&sorted);
 }
 
