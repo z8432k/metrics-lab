@@ -32,7 +32,6 @@ public:
 
     static int getnumber(int min, int max);
     static string getname();
-    static void printMenu();
 };
 
 

@@ -1,5 +1,4 @@
 #include "foto.h"
-#include "../mike/reg.h"
 
 #include <algorithm>
 
@@ -49,17 +48,6 @@ void reg::trimData() {
     outFileData << "";
 
     outFileData.close();
-}
-
-void reg::printMenu() {
-    cout << "(1) Добавить запись." << endl;
-    cout << "(2) Сортировка по возрастанию." << endl;
-    cout << "(3) Сортировка по убыванию." << endl;
-    cout << "(4) Изменить запись." << endl;
-    cout << "(5) Вывести все записи." << endl;
-    cout << "(6) Удалить запись." << endl;
-    cout << "(7) Удалить все записи." << endl;
-    cout << "(8) Выход." << endl;
 }
 
 bool reg::addRow() {

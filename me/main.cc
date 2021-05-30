@@ -15,11 +15,22 @@ int getnumber(int min = 0, int max = INT32_MAX) {
             return result;
         }
         else {
-            cerr << L"Ошибка. Попробуйте ещё раз." << endl;
+            cerr << "Ошибка. Попробуйте ещё раз." << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
+}
+
+void printMenu() {
+    cout << "(1) Добавить запись." << endl;
+    cout << "(2) Сортировка по возрастанию." << endl;
+    cout << "(3) Сортировка по убыванию." << endl;
+    cout << "(4) Изменить запись." << endl;
+    cout << "(5) Вывести все записи." << endl;
+    cout << "(6) Удалить запись." << endl;
+    cout << "(7) Удалить все записи." << endl;
+    cout << "(8) Выход." << endl;
 }
 
 int main() {
@@ -33,7 +44,7 @@ int main() {
     menu:
     cout << "Выберите пункт меню" << endl;
 
-    reg::printMenu();
+    printMenu();
 
     menu_choice = getnumber(0, 8);
 
@@ -42,8 +53,8 @@ int main() {
     switch (menu_choice) {
         case 1:
             system("clear");
-            ok = f.addRow();
 
+            ok = f.addRow();
             if (ok) {
                 cout << "Запись успешно добавлена." << endl;
             }
@@ -53,14 +64,17 @@ int main() {
             break;
         case 2:
             system("clear");
+
             f.ascSort();
             break;
         case 3:
             system("clear");
+
             f.descSort();
             break;
         case 4:
             system("clear");
+
             cout << "Введите номер записи, которую необходимо изменить:" << endl;
             id = getnumber();
             f.updateRow(id);
@@ -68,17 +82,20 @@ int main() {
             break;
         case 5:
             system("clear");
+
             f.printAll();
             cout << endl;
             break;
         case 6:
             system("clear");
+
             cout << "Введите номер записи, которую необходимо изменить:"<< endl;
             id = getnumber();
             ok = f.dropRow(id);
 
             if (ok) {
-                cout << "Запись под номером " << id << " была удалена."<<endl;
+                cout << "Запись под номером "
+                << id << " была удалена."<<endl;
             }
             else {
                 ok = true;
@@ -86,6 +103,7 @@ int main() {
             break;
         case 7:
             system("clear");
+
             f.trimData();
             cout << "Файл данных успешно очищщен." << endl;
             break;
@@ -102,5 +120,3 @@ int main() {
 
     return 0;
 }
-
-#pragma clang diagnostic pop
