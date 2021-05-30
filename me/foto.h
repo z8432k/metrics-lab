@@ -24,6 +24,7 @@ public:
     void writeTimestamp();
     void trimData();
     void addRow();
+    void updateRow(int id);
 
     static int getnumber(int min, int max);
     static string getname();

@@ -38,20 +38,20 @@ void foto::trimData() {
         cerr << "Ошибка открытия файла данных.";
     }
 
-    outFileData << endl;
+    outFileData << "";
 
     outFileData.close();
 }
 
 void foto::printMenu() {
     cout << "(1) Добавить запись." << endl;
-    cout << "(2) Сортировка по возрастанию." << endl;
-    cout << "(3) Сортировка по убыванию." << endl;
+    cout << "(2) Сортировка по возрастанию" << endl;
+    cout << "(3) Сортировка по убыванию" << endl;
     cout << "(4) Изменить запись." << endl;
     cout << "(5) Вывести все записи." << endl;
     cout << "(6) Удалить запись" << endl;
     cout << "(7) Удалить все записи." << endl;
-    cout << "(8) Выход." << endl;
+    cout << "(8) Выход" << endl;
 }
 
 void foto::addRow() {
@@ -60,7 +60,7 @@ void foto::addRow() {
     outFileData.open("data.txt");
 
     if (!outFileData.is_open()) {
-        cerr << "Файл не может быть открыт";
+        cerr << "Ошибка открытия файла данных.";
     }
 
     rows.push_back(row);
@@ -124,5 +124,28 @@ string foto::getname() {
             cerr << "Название не болжно быть таким коротким." << endl;
         }
     }
+}
+
+void foto::updateRow(int id) {
+    string row = readRow();
+
+    outFileData.open("data.txt");
+
+    if (!outFileData.is_open()) {
+        cerr << "Ошибка открытия файла данных.";
+    }
+
+    if (rows.size() > id) {
+        rows.at(id - 1) = row;
+    }
+    else {
+        cerr << "аписи с указанным номером не существует" << endl;
+    }
+
+    for (auto &item : rows) {
+        outFileData << item << endl;
+    }
+
+    outFileData.close();
 }
 

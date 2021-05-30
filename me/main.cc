@@ -3,13 +3,13 @@
 
 using namespace std;
 
-int getnumber() {
+int getnumber(int min, int max) {
     int result;
 
     for (;;) {
         cin >> result;
 
-        if(result > 0 && result <= 9) {
+        if(result > min && result <= max) {
             cin.ignore( numeric_limits<streamsize>::max(), '\n');
 
             return result;
@@ -34,18 +34,13 @@ int main() {
 
     foto::printMenu();
 
-    menu_choice = getnumber();
+    menu_choice = getnumber(0, 8);
 
     switch (menu_choice) {
         case 1:
             system("clear");
             f.addRow();
             cout << "Запись успешно добавлена." << endl;
-            break;
-        case 5:
-            system("clear");
-            f.printAll();
-            cout << endl;
             break;
         case 2:
             system("clear");
@@ -54,7 +49,17 @@ int main() {
             system("clear");
             break;
         case 4:
+            int id;
             system("clear");
+            cout << "Введите номер записи, которую необходимо изменить: " << endl;
+            id = getnumber(0, 99999);
+            f.updateRow(id);
+            cout << "Запись успешно обновлена." << endl;
+            break;
+        case 5:
+            system("clear");
+            f.printAll();
+            cout << endl;
             break;
         case 6:
             system("clear");

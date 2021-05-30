@@ -12,3 +12,5 @@ _deps
 cmake-build-*/
 .idea/
 tmp/
+data.txt
+mark.txt
