@@ -68,6 +68,11 @@ void foto::addRow() {
         cerr << "Ошибка открытия файла данных.";
     }
 
+    if (isDuplicate(row)) {
+        cerr << "Подобная запись уже существует." << endl;
+        return;
+    }
+
     rows.push_back(row);
 
     for (auto &item : rows) {
@@ -190,3 +195,30 @@ void foto::descSort() {
     printAll(&sorted);
 }
 
+bool foto::isDuplicate(string &entry) {
+    bool result = false;
+
+    if (find(rows.begin(), rows.end(), entry) != rows.end()) {
+        result = true;
+    }
+
+    return result;
+}
+
+size_t foto::split(const std::string &str, std::vector<std::string> &items, char sep) {
+    size_t pos = str.find(sep);
+    size_t initialPos = 0;
+    items.clear();
+
+    while(pos != std::string::npos) {
+        items.push_back(str.substr(initialPos, pos - initialPos));
+        initialPos = pos + 1;
+
+        pos = str.find(sep, initialPos);
+    }
+
+    // Add the last one
+    items.push_back(str.substr(initialPos, std::min(pos, str.size()) - initialPos + 1));
+
+    return items.size();
+}

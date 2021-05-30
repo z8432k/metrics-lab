@@ -17,6 +17,8 @@ private:
     string buffer;
 
     static string readRow();
+    bool isDuplicate(string &entry);
+    size_t split(const std::string &str, std::vector<std::string> &items, char sep);
 
 public:
     foto();
