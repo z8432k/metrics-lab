@@ -25,4 +25,4 @@ endif()
 
 add_subdirectory(lun)
 add_subdirectory(me)
-#add_subdirectory(mike)
+add_subdirectory(mike)
