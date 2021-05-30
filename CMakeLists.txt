@@ -23,6 +23,5 @@ if(CMAKE_COMPILER_IS_GNUCC)
     set(CMAKE_CXX_FLAGS "-Wno-unused-parameter")
 endif()
 
-add_subdirectory(lun)
 add_subdirectory(me)
 add_subdirectory(mike)
