@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int getnumber(int min, int max) {
+int getnumber(int min = 0, int max = INT32_MAX) {
     int result;
 
     for (;;) {
@@ -36,6 +36,7 @@ int main() {
 
     menu_choice = getnumber(0, 8);
 
+    int id;
     switch (menu_choice) {
         case 1:
             system("clear");
@@ -49,10 +50,9 @@ int main() {
             system("clear");
             break;
         case 4:
-            int id;
             system("clear");
-            cout << "Введите номер записи, которую необходимо изменить: " << endl;
-            id = getnumber(0, 99999);
+            cout << "Введите номер записи, которую необходимо изменить:" << endl;
+            id = getnumber();
             f.updateRow(id);
             cout << "Запись успешно обновлена." << endl;
             break;
@@ -63,6 +63,10 @@ int main() {
             break;
         case 6:
             system("clear");
+            cout << "Введите номер записи, которую необходимо изменить:"<< endl;
+            id = getnumber();
+            f.dropRow(id);
+            cout << "Запись под номером " << id << " была удалена."<<endl;
             break;
         case 7:
             system("clear");

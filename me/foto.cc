@@ -149,3 +149,25 @@ void foto::updateRow(int id) {
     outFileData.close();
 }
 
+void foto::dropRow(int id) {
+    outFileData.open("data.txt");
+
+    if (!outFileData.is_open()) {
+        cerr << "Ошибка открытия файла данных.";
+    }
+
+
+    if (rows.size() > id) {
+        rows.erase(rows.begin() + (id - 1));
+    }
+    else {
+        cerr << "Запись под указанным номером не существует." << endl;
+    }
+
+    for (auto &item : rows) {
+        outFileData << item << endl;
+    }
+
+    outFileData.close();
+}
+
