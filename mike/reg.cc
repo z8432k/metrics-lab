@@ -117,15 +117,24 @@ string reg::str() {
     }
 }
 
-void reg::updateTicket(int id) {
-    string t = inputTicket();
+void reg::updateTicket(int number) {
+    string ticket;
+    int window;
 
-    function<void (ofstream &out)> cb = [this, &id, &t](ofstream &outD) -> void {
-        if (tickets.size() > id) {
-            tickets.at(id - 1) = t;
-        } else {
-            cerr << "Номер в очереди не найден" << endl;
-        }
+    cout << "Введите номер окна" << endl;
+    window = num(0, 5);
+
+    int pos = getPos(number);
+
+    string orig = tickets[pos];
+    vector<string> items;
+    split(orig, items, '\t');
+
+    ticket = to_string(number) + "\t" + items[1] + "\t" + to_string(window);
+
+    function<void (ofstream &out)> cb = [this, &pos, &ticket](ofstream &outD) -> void {
+        tickets.erase(tickets.begin() + pos);
+        tickets.push_back(ticket);
     };
 
     aroundData(cb);
@@ -201,6 +210,30 @@ string reg::searchTicket(int id) {
     return found[0];
 }
 
+int reg::getPos(int id) {
+    string result;
+    string sid = to_string(id);
+    int pos = 0;
+    bool ok = false;
+
+    auto found = find_if(tickets.begin(), tickets.end(), [&sid, &pos, &ok](string &item) {
+        vector<string> items;
+        split(item, items, '\t');
+
+        if (items[0] == sid) {
+            ok = true;
+            return true;
+        }
+
+        if (!ok) {
+            pos++;
+        }
+
+        return false;
+    });
+
+    return pos;
+}
 
 size_t reg::split(const std::string &str, std::vector<std::string> &items, char sep) {
     size_t pos = str.find(sep);

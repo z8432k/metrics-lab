@@ -32,6 +32,8 @@ private:
 
     int findmax();
 
+    int getPos(int id);
+
 public:
 
     reg();

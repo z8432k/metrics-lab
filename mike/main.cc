@@ -44,7 +44,7 @@ int main() {
                 break;
             case 3:
                 system("clear");
-                cout << "Введите номер записи, которую необходимо изменить:" << endl;
+                cout << "Введите номер в очереди, который необходимо изменить:" << endl;
                 id = reg::num(0, QSIZE);
                 db.updateTicket(id);
                 cout << "Запись успешно обновлена." << endl;
@@ -61,7 +61,7 @@ int main() {
             case 5:
                 system("clear");
                 db.emptyBase();
-                cout << "Файл данных успешно очищщен." << endl;
+                cout << "Файл данных успешно очищен." << endl;
                 break;
             case 6:
                 system("clear");
